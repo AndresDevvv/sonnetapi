@@ -4,5 +4,5 @@ After cloning this repo:
 npm run dev
 
 # Build & Start Production
-npm run build
-npm run start
+- npm run build
+- npm run start
