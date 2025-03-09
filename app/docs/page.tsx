@@ -83,7 +83,7 @@ export default function DocsPage() {
                             Documentation
                         </h1>
                         <p className="text-lg text-muted-foreground mb-6">
-                            Everything you need to know about using SonnetAPI with Claude 3.5/3.7 Sonnet.
+                            Everything you need to know about using SonnetAPI with Claude 3.5/3.7 Sonnet, GPT-4o Mini, and more.
                         </p>
                     </motion.div>
 
@@ -128,6 +128,25 @@ export default function DocsPage() {
                                         <h3 className="text-xl font-semibold mb-3">Parse the Response</h3>
                                         <p className="mb-2">The API returns a JSON response with the model's output and token usage statistics.</p>
                                     </div>
+
+                                    <div className="mt-6">
+                                        <h3 className="text-xl font-semibold mb-3">Using DuckAI Source</h3>
+                                        <p className="mb-2">You can also use the DuckAI source to access additional models like GPT-4o Mini:</p>
+                                        <div className="bg-black/50 p-4 rounded-md font-mono text-sm mt-2">
+                                            <pre>{`curl -X POST https://realsonnetapi.andresdev.org/v1/chat/completions \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "gpt-4o-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, how are you today?"
+      }
+    ],
+    "source": "duckai"
+  }'`}</pre>
+                                        </div>
+                                    </div>
                                 </div>
                             </TabsContent>
 
@@ -147,7 +166,7 @@ export default function DocsPage() {
                                                 <div className="grid grid-cols-3 gap-2 p-2 rounded-md bg-black/30">
                                                     <span className="font-medium">model</span>
                                                     <span>string</span>
-                                                    <span className="text-muted-foreground">The model to use (required): "claude3.5" or "claude3.7"</span>
+                                                    <span className="text-muted-foreground">The model to use (required): "claude3.5", "claude3.7", "gpt-4o-mini", "o3-mini", or "claude-3-haiku"</span>
                                                 </div>
                                                 <div className="grid grid-cols-3 gap-2 p-2 rounded-md bg-black/30">
                                                     <span className="font-medium">messages</span>
@@ -157,7 +176,7 @@ export default function DocsPage() {
                                                 <div className="grid grid-cols-3 gap-2 p-2 rounded-md bg-black/30">
                                                     <span className="font-medium">source</span>
                                                     <span>string</span>
-                                                    <span className="text-muted-foreground">API source to use: "puter" (default) or "trae"</span>
+                                                    <span className="text-muted-foreground">API source to use: "puter" (default), "trae", or "duckai"</span>
                                                 </div>
                                                 <div className="grid grid-cols-3 gap-2 p-2 rounded-md bg-black/30">
                                                     <span className="font-medium">stream</span>
@@ -185,7 +204,7 @@ export default function DocsPage() {
 
                                     <div className="mb-6">
                                         <h3 className="text-xl font-semibold mb-3">API Sources</h3>
-                                        <p className="mb-2">SonnetAPI supports two different API sources that you can specify in your requests:</p>
+                                        <p className="mb-2">SonnetAPI supports three different API sources that you can specify in your requests:</p>
                                         
                                         <div className="space-y-4 mt-4">
                                             <div className="border border-border/50 rounded-lg p-4 bg-background/20">
@@ -204,6 +223,16 @@ export default function DocsPage() {
                                                     <li>Different response formatting</li>
                                                     <li>Serves as fallback when Puter is unavailable</li>
                                                     <li>May provide different token usage reporting</li>
+                                                </ul>
+                                            </div>
+
+                                            <div className="border border-border/50 rounded-lg p-4 bg-background/20">
+                                                <h4 className="text-lg font-medium mb-2">DuckAI</h4>
+                                                <p className="mb-2">New source that uses DuckDuckGo's AI API to access various models.</p>
+                                                <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                                                    <li>Supports additional models: gpt-4o-mini, o3-mini, claude-3-haiku</li>
+                                                    <li>Different response formatting</li>
+                                                    <li>No token usage reporting (returns zeros)</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -293,6 +322,72 @@ export default function DocsPage() {
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div className="border border-border/50 rounded-lg p-4 bg-background/20">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <h3 className="text-xl font-semibold">gpt-4o-mini</h3>
+                                                    <p className="text-muted-foreground mt-1">OpenAI's GPT-4o Mini model (DuckAI source only)</p>
+                                                </div>
+                                                <div className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-medium">
+                                                    New
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Context window</p>
+                                                    <p className="font-medium">128K tokens</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Source</p>
+                                                    <p className="font-medium">DuckAI only</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="border border-border/50 rounded-lg p-4 bg-background/20">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <h3 className="text-xl font-semibold">o3-mini</h3>
+                                                    <p className="text-muted-foreground mt-1">OpenAI's o3-mini model (DuckAI source only)</p>
+                                                </div>
+                                                <div className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-medium">
+                                                    New
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Context window</p>
+                                                    <p className="font-medium">128K tokens</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Source</p>
+                                                    <p className="font-medium">DuckAI only</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="border border-border/50 rounded-lg p-4 bg-background/20">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <h3 className="text-xl font-semibold">claude-3-haiku</h3>
+                                                    <p className="text-muted-foreground mt-1">Claude 3 Haiku model (claude-3-haiku-20240307)</p>
+                                                </div>
+                                                <div className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-medium">
+                                                    New
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Context window</p>
+                                                    <p className="font-medium">200K tokens</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-muted-foreground">Source</p>
+                                                    <p className="font-medium">DuckAI only</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="mt-8">
@@ -341,6 +436,7 @@ export default function DocsPage() {
                                                         <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Model</th>
                                                         <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Input</th>
                                                         <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Output</th>
+                                                        <th className="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Source</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-gray-800">
@@ -348,11 +444,31 @@ export default function DocsPage() {
                                                         <td className="px-4 py-3 text-sm">claude3.5</td>
                                                         <td className="px-4 py-3 text-sm">Free</td>
                                                         <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">Puter, Trae</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="px-4 py-3 text-sm">claude3.7</td>
                                                         <td className="px-4 py-3 text-sm">Free</td>
                                                         <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">Puter, Trae</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="px-4 py-3 text-sm">gpt-4o-mini</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">DuckAI</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="px-4 py-3 text-sm">o3-mini</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">DuckAI</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="px-4 py-3 text-sm">claude-3-haiku</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">Free</td>
+                                                        <td className="px-4 py-3 text-sm">DuckAI</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -377,6 +493,9 @@ export default function DocsPage() {
                                                     <SelectContent>
                                                         <SelectItem value="claude3.5">claude3.5</SelectItem>
                                                         <SelectItem value="claude3.7">claude3.7</SelectItem>
+                                                        <SelectItem value="gpt-4o-mini">gpt-4o-mini</SelectItem>
+                                                        <SelectItem value="o3-mini">o3-mini</SelectItem>
+                                                        <SelectItem value="claude-3-haiku">claude-3-haiku</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                             </div>
@@ -392,6 +511,7 @@ export default function DocsPage() {
                                                     <SelectContent>
                                                         <SelectItem value="puter">Puter</SelectItem>
                                                         <SelectItem value="trae">Trae</SelectItem>
+                                                        <SelectItem value="duckai">DuckAI</SelectItem>
                                                     </SelectContent>
                                                 </Select>
                                             </div>
